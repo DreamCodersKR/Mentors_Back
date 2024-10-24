@@ -11,12 +11,14 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.env.Environment;
 
 import jakarta.annotation.PostConstruct;
 
+@EntityScan("com/dream/entity")
 @SpringBootApplication
 public class MentorsProjectApplication extends SpringBootServletInitializer implements ApplicationRunner{
 
