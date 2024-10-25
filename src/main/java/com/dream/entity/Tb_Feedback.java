@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_feedback")
-public class TblFeedback {
+public class Tb_Feedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class TblFeedback {
 
     @ManyToOne
     @JoinColumn(name = "counsel_id", nullable = false)
-    private TblCounsel counsel;
+    private Tb_Counsel counsel;
 
     @Column(name = "ftb_content", length = 500)
     private String content;

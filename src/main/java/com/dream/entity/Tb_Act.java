@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_act")
-public class TblAct {
+public class Tb_Act {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "act_id")
@@ -14,5 +14,5 @@ public class TblAct {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private TblMember member;
+    private Tb_Member member;
 }

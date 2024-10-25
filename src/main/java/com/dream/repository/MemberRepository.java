@@ -2,7 +2,7 @@ package com.dream.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dream.entity.TblMember;
+import com.dream.entity.Tb_Member;
 
 
 //public interface MemberRepository extends JpaRepository<TblMember, String>{

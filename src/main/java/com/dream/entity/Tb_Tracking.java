@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_tracking")
-public class TblTracking {
+public class Tb_Tracking {
 	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "tarck_id")
@@ -14,5 +14,5 @@ public class TblTracking {
 
 	    @ManyToOne
 	    @JoinColumn(name = "mem_id", nullable = false)
-	    private TblMember member;
+	    private Tb_Member member;
 }

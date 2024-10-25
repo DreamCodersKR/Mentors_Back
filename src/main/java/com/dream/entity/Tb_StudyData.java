@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name = "Tb_study_data")
-public class TblStudyData {
+public class Tb_StudyData {
 	   	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "data_id")
@@ -16,7 +16,7 @@ public class TblStudyData {
 
 	    @ManyToOne
 	    @JoinColumn(name = "counsel_id", nullable = false)
-	    private TblCounsel counsel;
+	    private Tb_Counsel counsel;
 
 	    @Column(name = "up_date")
 	    private Timestamp uploadDate;

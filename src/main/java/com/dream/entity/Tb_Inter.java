@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tbl_inter")
-public class Tbl_Inter {
+@Table(name = "Tb_inter")
+public class Tb_Inter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class Tbl_Inter {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private TblMember member;
+    private Tb_Member member;
 
     @Column(name = "inter_cate", length = 100)
     private String interestCategory;

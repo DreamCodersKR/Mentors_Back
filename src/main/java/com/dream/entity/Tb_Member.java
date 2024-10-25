@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_member")
-public class TblMember {
+public class Tb_Member {
 	  	@Id
 	    @Column(name = "mem_id", length = 50)
 	    private String memberId;

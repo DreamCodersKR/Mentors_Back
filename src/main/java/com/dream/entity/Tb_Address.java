@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_address")
-public class TblAddress {
+public class Tb_Address {
 	 @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "address_id")
@@ -14,7 +14,7 @@ public class TblAddress {
 
 	    @ManyToOne
 	    @JoinColumn(name = "mem_id", nullable = false)
-	    private TblMember member;
+	    private Tb_Member member;
 
 	    @Column(name = "land_name", length = 50)
 	    private String landName;

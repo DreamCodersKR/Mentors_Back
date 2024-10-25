@@ -5,7 +5,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Tb_senior")
-public class TblSenior {
+public class Tb_Senior {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,5 +14,5 @@ public class TblSenior {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private TblMember member;
+    private Tb_Member member;
 }

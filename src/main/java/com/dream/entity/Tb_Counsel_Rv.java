@@ -8,7 +8,7 @@ import java.sql.Date;
 @Entity
 @Data
 @Table(name = "Tb_counsel_rv")
-public class TblCounselRv {
+public class Tb_Counsel_Rv {
 	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "rv_id")
@@ -16,7 +16,7 @@ public class TblCounselRv {
 
 	    @ManyToOne
 	    @JoinColumn(name = "counsel_id", nullable = false)
-	    private TblCounsel counsel;
+	    private Tb_Counsel counsel;
 
 	    @Column(name = "rv_date")
 	    private Date reviewDate;
