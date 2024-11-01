@@ -14,7 +14,7 @@ public class Tb_Address {
 
 	    @ManyToOne
 	    @JoinColumn(name = "mem_id", nullable = false)
-	    private Tb_Member member;
+	    private Tb_User member;
 
 	    @Column(name = "land_name", length = 50)
 	    private String landName;

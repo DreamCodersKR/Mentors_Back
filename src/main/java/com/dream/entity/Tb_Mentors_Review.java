@@ -15,7 +15,7 @@ public class Tb_Mentors_Review {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private Tb_Member member;
+    private Tb_User member;
 
     @Column(name = "mentor_rat")
     private int rating;

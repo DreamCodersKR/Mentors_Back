@@ -14,5 +14,5 @@ public class Tb_Senior {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private Tb_Member member;
+    private Tb_User member;
 }

@@ -14,7 +14,7 @@ public class Tb_Inter {
 
     @ManyToOne
     @JoinColumn(name = "mem_id", nullable = false)
-    private Tb_Member member;
+    private Tb_User member;
 
     @Column(name = "inter_cate", length = 100)
     private String interestCategory;
