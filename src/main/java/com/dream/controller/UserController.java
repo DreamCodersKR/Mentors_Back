@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.dream.entity.Tb_User;
 //import com.dream.repository.MemberRepository;
+import com.dream.repository.UserRepository;
+import com.dream.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
 @RestController
-public class MemberController {
+public class UserController {
 //	@Autowired
 //	MemberMapper Mapper;
 //	
 //	@Autowired
 //	MemberMapper memberMapper;
 //	
-//	@Autowired
-//	MemberService memberService;
-
+	@Autowired
+	UserService UserService;
+	
 //	 회원 가입
-	@PostMapping("/MemberJoin")
-	public  String MemberJoin(@RequestBody Tb_User member){
+	@PostMapping("/UserJoin")
+	public  String MemberJoin(@RequestBody Tb_User user){
 		// Vue js에서 보낸 데이터 처리
-		System.out.println("Vue에서 받은 Post 데이터 : " + member);
-		
-		
-		
+		System.out.println("Vue에서 받은 Post 데이터 : " + user);
+		UserService.UserJoin(user);
 		
 		return "성공";
 	}
