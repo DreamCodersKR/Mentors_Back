@@ -18,7 +18,7 @@ public class UserService {
 		}else {
 			user.setGender("W");
 		}
-		if(user.getMemberType()=="주니어") {
+		if(user.getMemberType().equals("주니어")) {
 			user.setMemberType("J");
 		}else {
 			user.setMemberType("S");

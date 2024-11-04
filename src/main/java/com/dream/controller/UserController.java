@@ -1,6 +1,7 @@
  package com.dream.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,16 @@ public class UserController {
 	
 //	 회원 가입
 	@PostMapping("/UserJoin")
-	public  String MemberJoin(@RequestBody Tb_User user){
+	public  ResponseEntity<Map<String, Object>> MemberJoin(@RequestBody Tb_User user){
 		// Vue js에서 보낸 데이터 처리
 		System.out.println("Vue에서 받은 Post 데이터 : " + user);
 		UserService.UserJoin(user);
 		
-		return "성공";
+		 Map<String, Object> result = new HashMap<>();
+		 result.put("email", user.getEmail());
+		 result.put("memberType", user.getMemberType());
+		
+		return ResponseEntity.ok(result);
 	}
 //	// 로그인
 //	@RequestMapping("/Real_Login")
