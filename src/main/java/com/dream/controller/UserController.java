@@ -1,40 +1,50 @@
  package com.dream.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
+import org.springframework.web.bind.annotation.RestController;
+import com.dream.entity.Tb_User;
+//import com.dream.repository.MemberRepository;
+import com.dream.repository.UserRepository;
+import com.dream.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller
-public class MemberController {
-
-//	@Autowired
-//	MemberRepository MemRepo;
-//
+@RestController
+public class UserController {
 //	@Autowired
 //	MemberMapper Mapper;
 //	
 //	@Autowired
-//	PlantMapper plantMapper;
-//	
-//	@Autowired
 //	MemberMapper memberMapper;
 //	
-//	@Autowired
-//	MemberService memberService;
-//	// 메인 페이지 호출
-//	@RequestMapping("/main")
-//	public String goMain() {
-//		return "main";
-//	}
-//
+	@Autowired
+	UserService UserService;
+	
+//	 회원 가입
+	@PostMapping("/UserJoin")
+	public  ResponseEntity<Map<String, Object>> MemberJoin(@RequestBody Tb_User user){
+		// Vue js에서 보낸 데이터 처리
+		System.out.println("Vue에서 받은 Post 데이터 : " + user);
+		UserService.UserJoin(user);
+		
+		 Map<String, Object> result = new HashMap<>();
+		 result.put("email", user.getEmail());
+		 result.put("memberType", user.getMemberType());
+		
+		return ResponseEntity.ok(result);
+	}
 //	// 로그인
 //	@RequestMapping("/Real_Login")
 //	public String Real_Login(String memId, String memPw, HttpSession session) {
@@ -55,34 +65,9 @@ public class MemberController {
 //		}
 //		return "redirect:main";
 //	}
-//
-//	// 회원가입 화면 이동
-//	@RequestMapping("/Go_Real_Join")
-//	public String Go_Real_Join() {
-//
-//		return "Real_Join";
-//	}
-//
-//	// 회원 가입
-//	@RequestMapping("/Real_Join")
-//	public String Real_Join(TblMember member){
-//		
-//		String hashedmemPw= memberService.encryptedPassword(member.getMemPw());
-//
-//		member.setMemPw(hashedmemPw);
-//		MemRepo.save(member);
-//		
-//		return "redirect:main";
-//	}
-//
-//	
-//	// 로그인 화면 이동
-//	@RequestMapping("/Go_Login")
-//	public String Go_Login() {
-//
-//		return "Login";
-//	}
-//
+
+
+
 //	// 로그아웃
 //	@RequestMapping("/Logout")
 //	public String Logout(HttpSession session) {
@@ -99,28 +84,7 @@ public class MemberController {
 //		return "redirect:main";
 //	}
 //	
-//	// 로그인 후 내 발전소 페이지 이동, 내 발전소 리스트 가져오기
-//	@RequestMapping("/loginon")
-//	public String gologinon(HttpSession session) {
-//		TblMember member=(TblMember)session.getAttribute("user");
-//		if (member==null) {
-//			session.setAttribute("ms", "로그인 후 사용가능합니다.");
-//			return "redirect:/main";
-//		}else 
-//		{
-//		String memId = member.getMemId();
-//		ArrayList<PlantListDTO> plantList = plantMapper.plantList(memId);
-//		session.setAttribute("PlnatList", plantList);
-//		return "loginon";
-//		}
-//	}
-//	
-//	// 마이페이지로 이동
-//	@RequestMapping("/Go_Mypage")
-//	public String Go_Mypage() {
-//
-//		return "myPage";
-//	}
+
 //
 //	// 회원정보 수정
 //	@RequestMapping("/M_modify")
@@ -150,13 +114,7 @@ public class MemberController {
 //		session.removeAttribute("user");
 //		return "redirect:main";
 //	}
-//
-//	// 발전지도화면 이동
-//	@RequestMapping("/Go_PowerMap")
-//	public String Go_PowerMap() {
-//		
-//		return "powerMap";
-//	}
+
 //
 //	// 아이디 중복 체크
 //	@GetMapping("/idCheck")

@@ -1,4 +1,4 @@
-package com.dream.Mentors;
+package com.dream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class TestController {
-	
 	@PostMapping("/testPostData")
 	public ResponseEntity<String> receiveDataFromVuePost (@RequestBody Map<String, String> requestData) {
 

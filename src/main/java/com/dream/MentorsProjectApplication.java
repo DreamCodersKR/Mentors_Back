@@ -1,4 +1,4 @@
-package com.dream.Mentors;
+package com.dream;
 
 import java.sql.DatabaseMetaData;
 

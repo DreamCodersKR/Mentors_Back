@@ -1,4 +1,4 @@
-package com.dream.Mentors;  // 이 패키지 내에 클래스를 생성
+package com.dream;  // 이 패키지 내에 클래스를 생성
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
