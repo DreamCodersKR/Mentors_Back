@@ -1,31 +1,34 @@
-//package com.dream.entity;
-//
-//import jakarta.persistence.*;
-//import lombok.Data;
-//
-//@Entity
-//@Data
-//@Table(name = "Tb_address")
-//public class Tb_Address {
-//	 @Id
-//	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	    @Column(name = "address_id")
-//	    private int addressId;
-//
-//	    @ManyToOne
-//	    @JoinColumn(name = "user_email", nullable = false)
-//	    private Tb_User user;
-//
-//	    @Column(name = "land_name", length = 50)
-//	    private String landName;
-//
-//	    @Column(name = "zip_code")
-//	    private int zipCode;
-//
-//	    @Column(name = "address", length = 100)
-//	    private String address;
-//
-//	    @Column(name = "detail", length = 100)
-//	    private String detail;
-//
-//}
+package com.dream.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Set;
+@Entity
+@Table(name = "tb_address")
+@Data
+@NoArgsConstructor
+public class Tb_Address {
+
+    @Id
+    @Column(name = "user_email", length = 50, nullable = false)
+    private String userEmail;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_email")
+    private Tb_User user;
+
+    @Column(name = "location_name", length = 50, nullable = false)
+    private String locationName;
+
+    @Column(name = "zip_code", length = 20, nullable = false)
+    private String zipCode;
+
+    @Column(name = "addr1", length = 600, nullable = false)
+    private String addr1;
+
+    @Column(name = "addr2", length = 600, nullable = false)
+    private String addr2;
+}

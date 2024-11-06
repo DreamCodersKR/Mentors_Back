@@ -1,53 +1,57 @@
 package com.dream.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-
-import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import java.util.Set;
 
 @Entity
+@Table(name = "tb_user")
 @Data
-@Table(name = "Tb_User")
+@NoArgsConstructor
 public class Tb_User {
-	  	@Id
-	  	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "user_idx", length = 50)
-	    private Long userIdx;
 
-	    @Column(name = "user_pw", nullable = false, length = 50)
-	    private String password;
 
-	    @Column(name = "user_name", nullable = false, length = 10)
-	    private String name;
+    @Id
+    @Column(name = "user_email", length = 50, nullable = false)
+    private String email;
 
-	    @Column(name = "user_gender", nullable = false, length = 1)
-	    private String gender;
+    @Column(name = "user_pw", length = 255, nullable = false)
+    private String password;
 
-	    @Column(name = "user_birth")
-	    private Date birthdate;
+    @Column(name = "user_gender", length = 1, nullable = false)
+    private String gender;
+    
+    @Column(name = "user_name", length = 50, nullable = false)
+    private String name;
+    
+    @Column(name = "user_nickname", length = 50, nullable = false)
+    private String nickName;
+    
+    @Column(name = "user_birthdate", nullable = false)
+    private LocalDate birthdate;
 
-	    @Column(name = "user_email", length = 50)
-	    private String email;
+    @Column(name = "user_del", length = 1, nullable = false)
+    private String userDel = "N";
 
-	    @Column(name = "user_cate", length = 10)
-	    private String memberType;
+    @Column(name = "user_notice", length = 1, nullable = false)
+    private String userNotice = "N";
 
-	    @Column(name = "user_del", length = 1, nullable = false)
-	    private String deleted="N";
+    @Column(name = "user_create", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime userCreate;
 
-	    @Column(name = "user_notice", length = 1, nullable = false)
-	    private String noticeAgree="Y";
-	    
-	    @CreationTimestamp
-	    @Column(name = "user_create")
-	    private LocalDateTime createDate;
+    @Column(name = "user_category", length = 10, nullable = false)
+    private String userCategory;
 
+    @Column(name = "premium_yn", length = 1, nullable = false)
+    private String premiumYn = "N";
+
+    @Column(name = "mentor_yn", length = 1, nullable = false)
+    private String mentorYn = "N";
+
+    @Column(name = "user_profile_file", length = 1000)
+    private String userProfileFile;
 }
-
-
