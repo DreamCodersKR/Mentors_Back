@@ -3,10 +3,7 @@ package com.dream.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
 @Table(name = "tb_user")
@@ -32,7 +29,7 @@ public class Tb_User {
     private String nickName;
     
     @Column(name = "user_birthdate", nullable = false)
-    private LocalDate birthdate;
+    private Date birthDate;
 
     @Column(name = "user_del", length = 1, nullable = false)
     private String userDel = "N";
@@ -50,8 +47,14 @@ public class Tb_User {
     private String premiumYn = "N";
 
     @Column(name = "mentor_yn", length = 1, nullable = false)
-    private String mentorYn = "N";
+    private String mentorYn;
 
     @Column(name = "user_profile_file", length = 1000)
     private String userProfileFile;
+    
+    @Transient
+    private String confirmPassword;
+    
+    @Transient
+    private boolean passwordMismatch;
 }
