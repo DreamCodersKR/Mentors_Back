@@ -20,9 +20,8 @@ public class Tb_Comment {
 	    @JoinColumn(name = "board_idx", nullable = false)
 	    private Tb_Board board;
 
-	    @ManyToOne
-	    @JoinColumn(name = "user_email", nullable = false)
-	    private Tb_User user;
+	    @Column(name = "user_email", nullable = false)
+	    private String email;
 
 	    @Column(name = "comment_content", length = 900, nullable = false)
 	    private String commentContent;
