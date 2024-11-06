@@ -25,18 +25,10 @@ public class UserController {
 		System.out.println("Vue에서 받은 Post 데이터 : " + user);
 		Map<String, Object> result = new HashMap<>();
 		
-		if(user.getConfirmPassword().equals(user.getPassword())) {
-			user.setPasswordMismatch(false);
-			userService.UserJoin(user);
-		}else {
-			 user.setPasswordMismatch(true);
-			 result.put("PasswordMismatch",user.isPasswordMismatch());
-			 return ResponseEntity.ok(result);
-		}
-		
+		userService.UserJoin(user);
+
 		result.put("email", user.getEmail());
 		result.put("memberType", user.getUserCategory());
-		result.put("PasswordMismatch",user.isPasswordMismatch());
 		return ResponseEntity.ok(result);
 	}
 	//로그인

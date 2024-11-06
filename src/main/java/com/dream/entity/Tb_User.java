@@ -26,7 +26,7 @@ public class Tb_User {
     private String name;
     
     @Column(name = "user_nickname", length = 50, nullable = false)
-    private String nickName;
+    private String nickName="enoch";
     
     @Column(name = "user_birthdate", nullable = false)
     private Date birthDate;
@@ -52,9 +52,4 @@ public class Tb_User {
     @Column(name = "user_profile_file", length = 1000)
     private String userProfileFile;
     
-    @Transient
-    private String confirmPassword;
-    
-    @Transient
-    private boolean passwordMismatch;
 }
