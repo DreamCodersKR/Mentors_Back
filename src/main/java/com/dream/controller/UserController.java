@@ -23,10 +23,17 @@ public class UserController {
 	public  ResponseEntity<Map<String, Object>> UserJoin(@RequestBody Tb_User user){
 		// Vue js에서 보낸 데이터 처리
 		System.out.println("Vue에서 받은 Post 데이터 : " + user);
+		
 		Map<String, Object> result = new HashMap<>();
 		
+		//비밀번호 암호화 인코딩
+		String hashedUserPw= userService.encryptedPassword(user.getPassword());
+		user.setPassword(hashedUserPw);
+		
+		//회원가입
 		userService.UserJoin(user);
-
+		
+		//회원정보 리턴
 		result.put("email", user.getEmail());
 		result.put("memberType", user.getUserCategory());
 		return ResponseEntity.ok(result);
@@ -35,17 +42,17 @@ public class UserController {
 	@PostMapping("/UserLogin")
 	public String UserLogin(@RequestBody Tb_User user, HttpSession session) {
 		
-		boolean checkUser = userService.UserLogin(user.getEmail(),user.getPassword());
-		System.out.println(checkUser);
-		if (checkUser==true) {
-            // 세션에 사용자 정보 저장
-            session.setAttribute("username", user.getName());
-            return "Login successful";
-        } else {
-            return "Invalid username or password";
-        }
-    }
-	
+		String email = user.getEmail();
+		String password = user.getPassword();
+		System.out.println(email);
+		System.out.println(password);
+		boolean checkPassword = userService.checkPassword(email, password);
+		System.out.println(checkPassword);
+		
+
+		
+		return "dd";
+	}
 }
 
 
