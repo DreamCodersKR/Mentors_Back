@@ -26,7 +26,7 @@ public class Tb_User {
     private String name;
     
     @Column(name = "user_nickname", length = 50, nullable = false)
-    private String nickName="enoch";
+    private String nickname;
     
     @Column(name = "user_birthdate", nullable = false)
     private Date birthDate;
@@ -49,7 +49,7 @@ public class Tb_User {
     @Column(name = "mentor_yn", length = 1, nullable = false)
     private String mentorYn;
 
-    @Column(name = "user_profile_file", length = 1000)
+    @Column(name = "user_profile_file", length = 1000, nullable = true)
     private String userProfileFile;
     
 }
