@@ -66,23 +66,22 @@ public class UserController {
 
 		String email = user.getEmail();
 		String password = user.getPassword();
-//		System.out.println(email);
-//		System.out.println(password);
 		
 //		비밀번호 일치여부 체크
 		boolean checkPassword = userService.checkPassword(email, password);
-//		System.out.println(checkPassword);
 		
 //		비밀번호 일치할 경우
 		if(checkPassword==true) {
 			 Tb_Token token =  userService.getToken(email);
-//			 System.out.println(token);
 			 
 			 // 토큰 인증 만료여부체크
 			 if(token.getExpireDate().isAfter(LocalDateTime.now())){
 				 session.setAttribute("userToken",token.getUserToken());
 			 }else {
-				 //토큰 재발급 
+				// 토큰이 만료된 경우 - 추후에 재발급 로직추가해야함
+	            result.put("message", "토큰이 만료되었습니다. 다시 로그인 해주세요.");
+	            return ResponseEntity.status(403).body(result);
+				 
 			 }
 				Tb_User userInfo = userService.getUserInfo(email); 		
 				result.put("name", userInfo.getName());
@@ -93,8 +92,8 @@ public class UserController {
 		}
 //		비밀번호 틀렸을 경우
 		else {
-			result.put("message", "잘못된 회원정보 입니다.");
-			return ResponseEntity.ok(result);
+	        result.put("message", "잘못된 이메일 또는 비밀번호입니다.");
+	        return ResponseEntity.status(401).body(result);
 		}
 		
 	}
