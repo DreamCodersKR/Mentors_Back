@@ -66,29 +66,36 @@ public class UserController {
 
 		String email = user.getEmail();
 		String password = user.getPassword();
-		System.out.println("vue 에서 받은 이메일 : " + email);
-		System.out.println("vue 에서 받은 비번 : " + password);
+//		System.out.println(email);
+//		System.out.println(password);
+		
+//		비밀번호 일치여부 체크
 		boolean checkPassword = userService.checkPassword(email, password);
 //		System.out.println(checkPassword);
-		if (checkPassword == true) {
-			Tb_Token token = userService.getToken(email);
+		
+//		비밀번호 일치할 경우
+		if(checkPassword==true) {
+			 Tb_Token token =  userService.getToken(email);
 //			 System.out.println(token);
-
-			// 토큰 인증 만료여부체크
-			if (token.getExpireDate().isAfter(LocalDateTime.now())) {
-				session.setAttribute("userToken", token.getUserToken());
-			} else {
-
-			}
+			 
+			 // 토큰 인증 만료여부체크
+			 if(token.getExpireDate().isAfter(LocalDateTime.now())){
+				 session.setAttribute("userToken",token.getUserToken());
+			 }else {
+				 //토큰 재발급 
+			 }
+				Tb_User userInfo = userService.getUserInfo(email); 		
+				result.put("name", userInfo.getName());
+				result.put("email", userInfo.getEmail());
+				result.put("userCate", userInfo.getUserCategory());
+				result.put("mentorYn", userInfo.getMentorYn());
+				return ResponseEntity.ok(result);
 		}
-
-		Tb_User userInfo = userService.getUserInfo(email);
-
-		result.put("name", userInfo.getName());
-		result.put("email", userInfo.getEmail());
-		result.put("userCate", userInfo.getUserCategory());
-		result.put("mentorYn", userInfo.getMentorYn());
-
-		return ResponseEntity.ok(result);
+//		비밀번호 틀렸을 경우
+		else {
+			result.put("message", "잘못된 회원정보 입니다.");
+			return ResponseEntity.ok(result);
+		}
+		
 	}
 }
