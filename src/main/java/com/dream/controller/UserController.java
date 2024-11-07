@@ -102,7 +102,7 @@ public class UserController {
 			session.setAttribute("userCategory", userInfo.getUserCategory());
 			session.setAttribute("premiumYn", userInfo.getPremiumYn());
 			session.setAttribute("mentorYn", userInfo.getMentorYn());
-			
+			session.setAttribute("userEmail", userInfo.getEmail());
 			return ResponseEntity.ok(result);
 		}
 //		비밀번호 틀렸을 경우

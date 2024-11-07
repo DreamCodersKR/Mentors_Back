@@ -34,4 +34,7 @@ public class Tb_Board {
 
     @Column(name = "board_likes", nullable = false)
     private int boardLikes = 0;
+    
+    @Transient
+    private String userEmail;
 }

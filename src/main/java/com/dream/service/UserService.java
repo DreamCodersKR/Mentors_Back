@@ -12,7 +12,7 @@ import com.dream.repository.UserRepository;
 @Service
 public class UserService {
 	@Autowired
-	UserRepository UserRepo;
+	UserRepository userRepo;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -22,7 +22,7 @@ public class UserService {
 	
 	// 회원가입
 	public void UserJoin(Tb_User user) {
-		UserRepo.save(user);
+		userRepo.save(user);
 	}
 
 	// 비밀번호 암호화
@@ -33,7 +33,7 @@ public class UserService {
 	}
 	// 암호화 된 비밀번호 디코딩
 	public boolean checkPassword(String email,String password) {
-		 Tb_User user= UserRepo.findByEmail(email);
+		 Tb_User user= userRepo.findByEmail(email);
 		 if(user !=null && user.getUserDel().equals("N")) {
 			 return passwordEncoder.matches(password, user.getPassword());
 		 }
