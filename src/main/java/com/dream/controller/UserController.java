@@ -25,12 +25,20 @@ public class UserController {
 	@GetMapping("/userSessionInfo")
 	public ResponseEntity<Map<String, Object>> getUserSessionInfo(HttpSession session) {
 		Map<String, Object> sessionInfo = new HashMap<>();
-
+		
 		// 세션에서 정보 가져오기
 		String userToken = (String) session.getAttribute("userToken");
+		String userName = (String) session.getAttribute("userName");
+		String userCategory = (String) session.getAttribute("userCategory");
+		String premiumYn = (String) session.getAttribute("premiumYn");
+		String mentorYn = (String) session.getAttribute("mentorYn");
 
 		if (userToken != null) {
 			sessionInfo.put("userToken", userToken);
+			sessionInfo.put("userName", userName);
+			sessionInfo.put("userCategory", userCategory);
+			sessionInfo.put("premiumYn", premiumYn);
+			sessionInfo.put("mentorYn", mentorYn);
 			return ResponseEntity.ok(sessionInfo);
 		} else {
 			sessionInfo.put("error", "No session found");
@@ -72,24 +80,30 @@ public class UserController {
 		boolean checkPassword = userService.checkPassword(email, password);
 		
 //		비밀번호 일치할 경우
-		if(checkPassword==true) {
+		if(checkPassword) {
 			 Tb_Token token =  userService.getToken(email);
-			 
 			 // 토큰 인증 만료여부체크
 			 if(token.getExpireDate().isAfter(LocalDateTime.now())){
+				 // 세션에 토큰저장
 				 session.setAttribute("userToken",token.getUserToken());
 			 }else {
 				// 토큰이 만료된 경우 - 추후에 재발급 로직추가해야함
 	            result.put("message", "토큰이 만료되었습니다. 다시 로그인 해주세요.");
 	            return ResponseEntity.status(403).body(result);
-				 
 			 }
-				Tb_User userInfo = userService.getUserInfo(email); 		
-				result.put("name", userInfo.getName());
-				result.put("email", userInfo.getEmail());
-				result.put("userCate", userInfo.getUserCategory());
-				result.put("mentorYn", userInfo.getMentorYn());
-				return ResponseEntity.ok(result);
+			 
+			Tb_User userInfo = userService.getUserInfo(email); 		
+			result.put("name", userInfo.getName());
+			result.put("email", userInfo.getEmail());
+			result.put("userCate", userInfo.getUserCategory());
+			result.put("mentorYn", userInfo.getMentorYn());
+			// 세션에 추가정보 저장
+			session.setAttribute("userName", userInfo.getName());
+			session.setAttribute("userCategory", userInfo.getUserCategory());
+			session.setAttribute("premiumYn", userInfo.getPremiumYn());
+			session.setAttribute("mentorYn", userInfo.getMentorYn());
+			
+			return ResponseEntity.ok(result);
 		}
 //		비밀번호 틀렸을 경우
 		else {
