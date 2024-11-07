@@ -3,7 +3,7 @@
 <mapper namespace="com.dream.mappers.UserMapper">
 
 
-<select id="GetToken" parameterType="String" resultType= "com.dream.entity.Tb_Token">
+<select id="getToken" parameterType="String" resultType= "com.dream.entity.Tb_Token">
 	select 
 	user_token as userToken, 
 	expire_date as expireDate,
@@ -12,7 +12,7 @@
 	where user_email = #{email}
 </select>
 
-<select id="GetUserInfo" parameterType="String" resultType="com.dream.entity.Tb_User">
+<select id="getUserInfo" parameterType="String" resultType="com.dream.entity.Tb_User">
 	select 
 	user_email as email,
 	user_name as name,
@@ -20,9 +20,7 @@
 	mentor_yn as mentorYn
 	from tb_user
 	where user_email = #{email}
-
 </select>
-
 
 
 

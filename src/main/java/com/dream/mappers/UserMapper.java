@@ -10,9 +10,9 @@ import com.dream.entity.Tb_User;
 @Mapper
 public interface UserMapper {
 	
-public Tb_Token GetToken(String email);
+public Tb_Token getToken(String email);
 
-public Tb_User GetUserInfo(String email);
+public Tb_User getUserInfo(String email);
 	
 	
 	
