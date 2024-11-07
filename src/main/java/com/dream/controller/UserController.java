@@ -19,7 +19,7 @@ public class UserController {
 	    private UserService userService;
 	    
 //	 회원 가입
-	@PostMapping("/UserJoin")
+	@PostMapping("/userJoin")
 	public  ResponseEntity<Map<String, Object>> UserJoin(@RequestBody Tb_User user){
 		// Vue js에서 보낸 데이터 처리
 		System.out.println("Vue에서 받은 Post 데이터 : " + user);
@@ -39,7 +39,7 @@ public class UserController {
 		return ResponseEntity.ok(result);
 	}
 	//로그인
-	@PostMapping("/UserLogin")
+	@PostMapping("/userLogin")
 	public String UserLogin(@RequestBody Tb_User user, HttpSession session) {
 		
 		String email = user.getEmail();
