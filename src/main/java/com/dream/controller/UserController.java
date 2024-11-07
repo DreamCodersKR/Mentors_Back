@@ -1,7 +1,6 @@
  package com.dream.controller;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dream.entity.Tb_Token;
 import com.dream.entity.Tb_User;
-import com.dream.mappers.UserMapper;
 import com.dream.service.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class UserController {
 	
-	    @Autowired
-	    private UserService userService;
+	 @Autowired
+	 private UserService userService;
 //	 회원 가입
 	@PostMapping("/userJoin")
-	public  ResponseEntity<Map<String, Object>> UserJoin(@RequestBody Tb_User user){
+	public  ResponseEntity<Map<String, Object>> userJoin(@RequestBody Tb_User user){
 		// Vue js에서 보낸 데이터 처리
 //		System.out.println("Vue에서 받은 Post 데이터 : " + user);
 		
@@ -43,7 +41,7 @@ public class UserController {
 	}
 	//로그인
 	@PostMapping("/userLogin")
-	public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody Tb_User user, HttpSession session) {
+	public ResponseEntity<Map<String, Object>> userLogin(@RequestBody Tb_User user, HttpSession session) {
 		
 		Map<String, Object> result = new HashMap<>();
 		
@@ -54,18 +52,18 @@ public class UserController {
 		boolean checkPassword = userService.checkPassword(email, password);
 //		System.out.println(checkPassword);
 		if(checkPassword==true) {
-			 Tb_Token token =  userService.GetToken(email);
-			 System.out.println(token);
+			 Tb_Token token =  userService.getToken(email);
+//			 System.out.println(token);
 			 
 			 // 토큰 인증 만료여부체크
 			 if(token.getExpireDate().isAfter(LocalDateTime.now())){
 				 session.setAttribute("UserToken",token.getUserToken());
 			 }else {
 				 
-			 }
+			 } 
 		}
 		
-		Tb_User userInfo = userService.GetUserInfo(email); 
+		Tb_User userInfo = userService.getUserInfo(email); 
 		
 		result.put("name", userInfo.getName());
 		result.put("email", userInfo.getEmail());
