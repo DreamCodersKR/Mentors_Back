@@ -49,8 +49,8 @@ public class UserController {
 		
 		String email = user.getEmail();
 		String password = user.getPassword();
-//		System.out.println(email);
-//		System.out.println(password);
+		System.out.println("vue 에서 받은 이메일 : " + email);
+		System.out.println("vue 에서 받은 비번 : " +password);
 		boolean checkPassword = userService.checkPassword(email, password);
 //		System.out.println(checkPassword);
 		if(checkPassword==true) {
