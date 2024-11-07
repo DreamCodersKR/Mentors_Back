@@ -21,10 +21,10 @@ public class Tb_Board {
     private Tb_User user;
 
     @Column(name = "board_title", length = 1000, nullable = false)
-    private String boardTitle;
+    private String title;
 
     @Column(name = "board_content", nullable = false, columnDefinition = "TEXT")
-    private String boardContent;
+    private String content;
 
     @Column(name = "board_write_dt", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime boardWriteDate;
