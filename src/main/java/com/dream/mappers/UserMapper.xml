@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.mappers.UserMapper">
+
+
+<select id="GetToken" parameterType="String" resultType= "com.dream.entity.Tb_Token">
+	select 
+	user_token as userToken, 
+	expire_date as expireDate,
+	issue_date as issueDate 
+	from tb_token 
+	where user_email = #{email}
+</select>
+
+<select id="GetUserInfo" parameterType="String" resultType="com.dream.entity.Tb_User">
+	select 
+	user_email as email,
+	user_name as name,
+	user_category as userCategory,
+	mentor_yn as mentorYn
+	from tb_user
+	where user_email = #{email}
+
+</select>
+
+
+
+
+
+
+</mapper>

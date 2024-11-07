@@ -5,7 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.dream.entity.Tb_Token;
 import com.dream.entity.Tb_User;
+import com.dream.mappers.UserMapper;
 import com.dream.repository.UserRepository;
 
 @Service
@@ -16,6 +19,8 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	 @Autowired
+	 private UserMapper userMapper;
 	
 	// 회원가입
 	public void UserJoin(Tb_User user) {
@@ -37,5 +42,18 @@ public class UserService {
 	        return false;
 	    }
 	
-
+	
+	
+	//유저 토큰 가져오기
+	public Tb_Token GetToken(String email) {
+		Tb_Token token = userMapper.GetToken(email);
+		return token;
+	}
+	
+	//유저 정보 가져오기
+	public Tb_User GetUserInfo(String email) {
+		Tb_User user = userMapper.GetUserInfo(email);
+		return user;
+	}
+	
 }
