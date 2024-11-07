@@ -49,8 +49,12 @@ public class UserController {
 		String password = user.getPassword();
 //		System.out.println(email);
 //		System.out.println(password);
+		
+//		비밀번호 일치여부 체크
 		boolean checkPassword = userService.checkPassword(email, password);
 //		System.out.println(checkPassword);
+		
+//		비밀번호 일치할 경우
 		if(checkPassword==true) {
 			 Tb_Token token =  userService.getToken(email);
 //			 System.out.println(token);
@@ -59,18 +63,21 @@ public class UserController {
 			 if(token.getExpireDate().isAfter(LocalDateTime.now())){
 				 session.setAttribute("UserToken",token.getUserToken());
 			 }else {
-				 
-			 } 
+				 //토큰 재발급 
+			 }
+				Tb_User userInfo = userService.getUserInfo(email); 		
+				result.put("name", userInfo.getName());
+				result.put("email", userInfo.getEmail());
+				result.put("userCate", userInfo.getUserCategory());
+				result.put("mentorYn", userInfo.getMentorYn());
+				return ResponseEntity.ok(result);
+		}
+//		비밀번호 틀렸을 경우
+		else {
+			result.put("message", "잘못된 회원정보 입니다.");
+			return ResponseEntity.ok(result);
 		}
 		
-		Tb_User userInfo = userService.getUserInfo(email); 
-		
-		result.put("name", userInfo.getName());
-		result.put("email", userInfo.getEmail());
-		result.put("userCate", userInfo.getUserCategory());
-		result.put("mentorYn", userInfo.getMentorYn());
-
-		return ResponseEntity.ok(result);
 	}
 }
 
