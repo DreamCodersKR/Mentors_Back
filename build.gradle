@@ -38,7 +38,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'	//mybatis
     implementation 'org.springframework.boot:spring-boot-starter-security' //bcrypt
-	implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4' //bcrypt	
+	implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4' //bcrypt
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+		
 }
 
 tasks.named('test') {
