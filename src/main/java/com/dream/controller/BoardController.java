@@ -20,7 +20,10 @@ public class BoardController {
 	@PostMapping("/writeBoard")
 	public ResponseEntity<Map<String, Object>> writeBoard(@RequestBody Tb_Board board,HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
-		System.out.println(board);
+		
+		
+		
+		
 		result.put("test", "test");
 		
 		return ResponseEntity.ok(result);
