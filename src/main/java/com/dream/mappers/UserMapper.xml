@@ -20,9 +20,7 @@
 	mentor_yn as mentorYn
 	from tb_user
 	where user_email = #{email}
-
 </select>
-
 
 
 

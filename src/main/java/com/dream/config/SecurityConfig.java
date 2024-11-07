@@ -21,7 +21,7 @@ public class SecurityConfig {
 	        http
 	            .csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화 (필요한 경우에만)
 	            .authorizeHttpRequests(authorize -> authorize
-	                .requestMatchers("/UserJoin", "/UserLogin", "/UserLogout").permitAll() // 특정 엔드포인트 접근 허용
+	                .requestMatchers("/userJoin", "/userLogin", "/userLogout").permitAll() // 특정 엔드포인트 접근 허용
 	                .anyRequest().authenticated() // 나머지 요청은 인증 필요
 	            )
 	            .cors(); // CORS 설정 허용
