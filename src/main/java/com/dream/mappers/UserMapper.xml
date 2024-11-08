@@ -16,6 +16,7 @@
 	select 
 	user_email as email,
 	user_name as name,
+	user_nickname as nickname,
 	user_category as userCategory,
 	mentor_yn as mentorYn
 	from tb_user

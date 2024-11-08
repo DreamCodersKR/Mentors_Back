@@ -29,6 +29,7 @@ public class UserController {
 		// 세션에서 정보 가져오기
 		String userToken = (String) session.getAttribute("userToken");
 		String userName = (String) session.getAttribute("userName");
+		String nickName = (String) session.getAttribute("nickName");
 		String userCategory = (String) session.getAttribute("userCategory");
 		String premiumYn = (String) session.getAttribute("premiumYn");
 		String mentorYn = (String) session.getAttribute("mentorYn");
@@ -36,6 +37,7 @@ public class UserController {
 		if (userToken != null) {
 			sessionInfo.put("userToken", userToken);
 			sessionInfo.put("userName", userName);
+			sessionInfo.put("nickname", nickName);
 			sessionInfo.put("userCategory", userCategory);
 			sessionInfo.put("premiumYn", premiumYn);
 			sessionInfo.put("mentorYn", mentorYn);
@@ -94,11 +96,14 @@ public class UserController {
 			 
 			Tb_User userInfo = userService.getUserInfo(email); 		
 			result.put("name", userInfo.getName());
+			result.put("nickName", userInfo.getNickname());
 			result.put("email", userInfo.getEmail());
 			result.put("userCate", userInfo.getUserCategory());
 			result.put("mentorYn", userInfo.getMentorYn());
+			result.put("premiumYn", userInfo.getPremiumYn());
 			// 세션에 추가정보 저장
 			session.setAttribute("userName", userInfo.getName());
+			session.setAttribute("nickName", userInfo.getNickname());
 			session.setAttribute("userCategory", userInfo.getUserCategory());
 			session.setAttribute("premiumYn", userInfo.getPremiumYn());
 			session.setAttribute("mentorYn", userInfo.getMentorYn());
