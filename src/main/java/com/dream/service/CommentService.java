@@ -5,16 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.dream.entity.Tb_Comment;
 import com.dream.mappers.CommentMapper;
+import com.dream.repository.CommentRepository;
 
 @Service
 public class CommentService {
 	
 	@Autowired
 	private CommentMapper commentMapper;
+	
+	@Autowired
+	private CommentRepository commentRepo;
+	
 	
 	public Map<String, Object> addComment (Tb_Comment comment) {
 		Map<String, Object> response = new HashMap<>();
@@ -39,6 +45,22 @@ public class CommentService {
 	
 	public List<Tb_Comment> getCommentsByBoardIdx(int boardIdx) {
 		return commentMapper.selectCommentsByBoardIdx(boardIdx);
+	}
+	
+//	댓글삭제
+	public ResponseEntity<Map<String, Object>> commentDel(int commentIdx) {
+		Map<String, Object> result = new HashMap<>();
+		Tb_Comment comment = commentRepo.findById(commentIdx).orElse(null);
+//		System.out.println(comment);
+		comment.setCommentDelYn("Y");
+		commentRepo.save(comment);
+		if(comment.getCommentDelYn().equals("Y")) {
+			result.put("message", "댓글삭제 성공");
+			return ResponseEntity.ok(result);
+		}else {
+			result.put("message", "댓글삭제 실패");
+			return ResponseEntity.ok(result);
+		}
 	}
 	
 }

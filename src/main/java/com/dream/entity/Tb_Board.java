@@ -38,7 +38,7 @@ public class Tb_Board {
     @Column(name = "board_likes", nullable = false)
     private int boardLikes = 0;
     
-    @Column(name = "board_delYn", nullable = false)
+    @Column(name = "board_del_yn", nullable = false)
     private String boardDelYn ="N";
     
     // 필드이외에 전달되는 값

@@ -58,7 +58,7 @@ public class BoardController {
 		}
 	}
 	
-	
+	//게시물 삭제
 	@GetMapping("/boardDelete/{id}")
 	public ResponseEntity<Map<String, Object>> boardDelete(@PathVariable("id") Integer boardIdx){
 		Tb_Board board = boardService.getBoardDetail(boardIdx);

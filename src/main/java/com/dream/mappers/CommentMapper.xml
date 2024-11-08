@@ -15,6 +15,7 @@
 		    , c.comment_content AS commentContent
 		    , c.comment_date AS commentDate
 		    , u.user_nickname AS userNickname
+		    , c.comment_del_yn AS commentDelYn
 		FROM 
 		    tb_comment c
 		LEFT JOIN 

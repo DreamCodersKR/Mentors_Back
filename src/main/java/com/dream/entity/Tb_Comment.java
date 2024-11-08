@@ -30,6 +30,10 @@ public class Tb_Comment {
 	    @Column(name = "comment_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	    private LocalDateTime commentDate;
 	    
+	    @Column(name = "comment_del_yn", nullable = false)
+	    private String commentDelYn ="N";
+	    
+	    
 	    @Transient
 	    private String userNickname;
 	    @Transient
