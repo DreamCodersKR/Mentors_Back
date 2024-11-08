@@ -34,6 +34,15 @@ public class BoardController {
 		return writeResult;
 	}
 	
+
+	// 게시글 전체 조회
+	@GetMapping("/boardList")
+	public ResponseEntity<List<Tb_Board>> getBoardList() {
+		List<Tb_Board> boardList = boardService.getBoardList();
+		//System.out.println(boardList);
+		return ResponseEntity.ok(boardList);
+	}
+	
 	// 게시글 상세보기 조회
 	@GetMapping("/boardDetail/{id}")
 	public ResponseEntity<Tb_Board> getBoardDetail(@PathVariable("id") Integer boardIdx) {
@@ -45,5 +54,6 @@ public class BoardController {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
 	
 }

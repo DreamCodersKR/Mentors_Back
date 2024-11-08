@@ -41,10 +41,7 @@ public class BoardService {
 			 return ResponseEntity.ok(result);
 		 }
 	}
-	
 
-
-	
 	// 글 목록 조회 
 	public List<Tb_Board> getBoardList() {
 		return boardMapper.selectAllBoards();
@@ -55,5 +52,9 @@ public class BoardService {
 		return boardRepo.findById(boardIdx).orElse(null);
 	}
 	
-
+	// 댓글 목록 조회
+	public Tb_Board getCommentDetail(Integer boardIdx) {
+		return boardRepo.findById(boardIdx).orElse(null);
+	}
+	
 }

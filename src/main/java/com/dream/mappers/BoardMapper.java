@@ -1,7 +1,6 @@
 package com.dream.mappers;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 
@@ -14,7 +13,8 @@ public interface BoardMapper {
 	
 	public Integer writeBoard(Tb_Board board);
 	
-	
+
+	public ArrayList<Tb_Board> viewBoard(String userEmail);
 	List<Tb_Board> selectAllBoards();
 	
 	
