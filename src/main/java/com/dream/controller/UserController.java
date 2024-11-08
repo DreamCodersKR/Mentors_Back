@@ -27,6 +27,7 @@ public class UserController {
 		Map<String, Object> sessionInfo = new HashMap<>();
 		
 		// 세션에서 정보 가져오기
+		String userEmail = (String) session.getAttribute("userEmail");
 		String userToken = (String) session.getAttribute("userToken");
 		String userName = (String) session.getAttribute("userName");
 		String nickName = (String) session.getAttribute("nickName");
@@ -35,6 +36,7 @@ public class UserController {
 		String mentorYn = (String) session.getAttribute("mentorYn");
 
 		if (userToken != null) {
+			sessionInfo.put("userEmail", userEmail);
 			sessionInfo.put("userToken", userToken);
 			sessionInfo.put("userName", userName);
 			sessionInfo.put("nickname", nickName);
@@ -96,6 +98,7 @@ public class UserController {
 			 
 			Tb_User userInfo = userService.getUserInfo(email); 		
 			result.put("name", userInfo.getName());
+			result.put("userEmail", userInfo.getEmail());
 			result.put("nickName", userInfo.getNickname());
 			result.put("email", userInfo.getEmail());
 			result.put("userCate", userInfo.getUserCategory());
