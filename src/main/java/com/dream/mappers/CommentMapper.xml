@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.mappers.CommentMapper">
+
+    <insert id="insertComment" parameterType="com.dream.entity.Tb_Comment">
+        INSERT INTO tb_comment (board_idx, user_email, comment_content, comment_date)
+        VALUES (#{board.boardIdx}, #{userEmail}, #{commentContent}, NOW())
+    </insert>
+
+	<select id="selectCommentsByBoardIdx" resultType="com.dream.entity.Tb_Comment">
+	  SELECT 
+		      c.comment_idx AS commentIdx
+		    , c.board_idx AS boardIdx
+		    , c.user_email AS userEmail
+		    , c.comment_content AS commentContent
+		    , c.comment_date AS commentDate
+		    , u.user_nickname AS userNickname
+		FROM 
+		    tb_comment c
+		LEFT JOIN 
+		    tb_user u ON c.user_email = u.user_email
+	   WHERE 
+		    c.board_idx = #{boardIdx}
+	   ORDER BY 
+		    c.comment_date ASC;
+	</select>
+	
+	
+
+</mapper>
