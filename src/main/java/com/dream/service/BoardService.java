@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.dream.entity.Tb_Board;
 import com.dream.mappers.BoardMapper;
@@ -44,6 +45,12 @@ public class BoardService {
 	public List<Tb_Board> getBoardList() {
 		return boardMapper.selectAllBoards();
 	}
+	
+	// 게시글 상세 목록 조회
+	public Tb_Board getBoardDetail(Integer boardIdx) {
+		return boardRepo.findById(boardIdx).orElse(null);
+	}
+	
 	
 	
 	
