@@ -24,6 +24,7 @@ public class BoardController {
 	public ResponseEntity<Map<String, Object>> writeBoard(@RequestBody Tb_Board board,HttpSession session) {
 		
 		String userEmail = (String)session.getAttribute("userEmail");
+		
 		board.setUserEmail(userEmail);
 		 
 		ResponseEntity<Map<String, Object>>writeResult = boardService.writeBoard(board);
@@ -35,7 +36,7 @@ public class BoardController {
 	@GetMapping("/boardList")
 	public ResponseEntity<List<Tb_Board>> getBoardList() {
 		List<Tb_Board> boardList = boardService.getBoardList();
-		System.out.println(boardList);
+//		System.out.println(boardList);
 		return ResponseEntity.ok(boardList);
 	}
 	

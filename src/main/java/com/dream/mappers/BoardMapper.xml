@@ -8,8 +8,8 @@
 		(user_email, board_title,
 		board_content,board_likes,board_views)
 		values
-		(#{userEmail}, #{title},
-		#{content},#{boardLikes},#{boardViews})
+		(#{userEmail}, #{boardTitle},
+		#{boardContent},#{boardLikes},#{boardViews})
 	</insert>
 	
 	<resultMap id="BoardResultMap" type="com.dream.entity.Tb_Board">
