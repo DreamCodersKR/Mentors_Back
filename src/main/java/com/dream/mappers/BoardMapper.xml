@@ -12,7 +12,18 @@
 		#{content},#{boardLikes},#{boardViews})
 	</insert>
 
-
+	<select id="viewBoard" parameterType="String">
+	
+	select
+	board_idx as boardIdx,
+	board_likes as boardLikes,
+	board_write_dt as boardWriteDate,
+	board_title as title,
+	board_content as content,
+	from tb_board
+	where user_email = #{userEmail}
+	
+	</select>
 
 
 

@@ -1,5 +1,6 @@
 package com.dream.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,10 +37,14 @@ public class BoardService {
 			 result.put("message", "게시물 작성 실패");
 			 return ResponseEntity.ok(result);
 		 }
-		 
-		 
 	}
 	
+//	게시물 보기
+	public void viewBoard(String userEmail){
+		
+		ArrayList<Tb_Board> boardList = boardMapper.viewBoard(userEmail);
+		System.out.println(boardList);
+	}
 	
 	
 }
