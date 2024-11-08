@@ -26,9 +26,6 @@ public class BoardController {
 		 
 		ResponseEntity<Map<String, Object>>writeResult = boardService.writeBoard(board);
 		
-		
-	
-		
 		return writeResult;
 	}
 }
