@@ -1,8 +1,10 @@
 package com.dream.controller;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,4 +30,13 @@ public class BoardController {
 		
 		return writeResult;
 	}
+	
+	// 게시글 전체 조회
+	@GetMapping("/boardList")
+	public ResponseEntity<List<Tb_Board>> getBoardList() {
+		List<Tb_Board> boardList = boardService.getBoardList();
+		System.out.println(boardList);
+		return ResponseEntity.ok(boardList);
+	}
+	
 }

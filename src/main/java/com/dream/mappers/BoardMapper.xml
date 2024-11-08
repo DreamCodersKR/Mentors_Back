@@ -11,15 +11,39 @@
 		(#{userEmail}, #{title},
 		#{content},#{boardLikes},#{boardViews})
 	</insert>
+	
+	<resultMap id="BoardResultMap" type="com.dream.entity.Tb_Board">
+        <id property="boardIdx" column="board_idx"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="boardTitle" column="board_title"/>
+        <result property="boardContent" column="board_content"/>
+        <result property="boardWriteDate" column="board_write_dt"/>
+        <result property="boardViews" column="board_views"/>
+        <result property="boardLikes" column="board_likes"/>
+    </resultMap>
 
-
-
-
-
-
-
-
-
+	<select id="selectAllBoards" resultType="com.dream.entity.Tb_Board">
+      SELECT 
+		    b.board_idx AS boardIdx,
+		    u.user_nickname AS userNickname,        
+		    b.user_email AS userEmail,
+		    b.board_title AS boardTitle,
+		    b.board_content AS boardContent,
+		    b.board_write_dt AS boardWriteDt,
+		    b.board_views AS boardViews,
+		    b.board_likes AS boardLikes,
+		    COALESCE(COUNT(c.comment_idx), 0) AS commentCount
+		FROM 
+		    tb_board b
+		LEFT JOIN 
+		    tb_user u ON b.user_email = u.user_email
+		LEFT JOIN 
+		    tb_comment c ON b.board_idx = c.board_idx
+	   GROUP BY 
+		    b.board_idx
+	   ORDER BY 
+		    b.board_write_dt DESC;
+    </select>
 
 
 
