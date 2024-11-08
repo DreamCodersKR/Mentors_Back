@@ -1,6 +1,7 @@
 package com.dream.controller;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,20 +40,32 @@ public class BoardController {
 	@GetMapping("/boardList")
 	public ResponseEntity<List<Tb_Board>> getBoardList() {
 		List<Tb_Board> boardList = boardService.getBoardList();
-		//System.out.println(boardList);
-		return ResponseEntity.ok(boardList);
+//		System.out.println(boardList);
+		List<Tb_Board> filteredBoardList = boardList.stream()
+			    .filter(board -> !"Y".equals(board.getBoardDelYn()))
+			    .collect(Collectors.toList());
+		return ResponseEntity.ok(filteredBoardList);
 	}
 	
 	// 게시글 상세보기 조회
 	@GetMapping("/boardDetail/{id}")
 	public ResponseEntity<Tb_Board> getBoardDetail(@PathVariable("id") Integer boardIdx) {
 		Tb_Board board = boardService.getBoardDetail(boardIdx);
-		
 		if(board != null) {
 			return ResponseEntity.ok(board);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
+	}
+	
+	
+	@GetMapping("/boardDelete/{id}")
+	public ResponseEntity<Map<String, Object>> boardDelete(@PathVariable("id") Integer boardIdx){
+		Tb_Board board = boardService.getBoardDetail(boardIdx);
+		board.setBoardDelYn("Y");
+		ResponseEntity<Map<String, Object>> delResult = boardService.DeleteBoard(board);
+		
+		return delResult;
 	}
 	
 	

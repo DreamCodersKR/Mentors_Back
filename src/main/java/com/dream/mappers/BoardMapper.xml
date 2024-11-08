@@ -20,6 +20,7 @@
         <result property="boardWriteDate" column="board_write_dt"/>
         <result property="boardViews" column="board_views"/>
         <result property="boardLikes" column="board_likes"/>
+        <result property="boardDelYn" column="board_del_yn"/>
     </resultMap>
 
 
@@ -33,6 +34,7 @@
 		    b.board_write_dt AS boardWriteDt,
 		    b.board_views AS boardViews,
 		    b.board_likes AS boardLikes,
+		    b.board_del_yn AS boardDelYn,
 		    COALESCE(COUNT(c.comment_idx), 0) AS commentCount
 		FROM 
 		    tb_board b

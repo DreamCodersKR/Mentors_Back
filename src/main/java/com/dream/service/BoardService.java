@@ -57,4 +57,18 @@ public class BoardService {
 		return boardRepo.findById(boardIdx).orElse(null);
 	}
 	
+	// 게시물 삭제
+	public ResponseEntity<Map<String, Object>> DeleteBoard(Tb_Board board){
+		Map<String, Object> result = new HashMap<>();
+		boardRepo.save(board);
+		if(board.getBoardDelYn().equals("Y")) {
+			result.put("message", "게시물삭제 성공");
+			return ResponseEntity.ok(result);
+		}else {
+			result.put("message", "게시물삭제 실패");
+			return ResponseEntity.ok(result);
+		}
+	}
+	
+	
 }
