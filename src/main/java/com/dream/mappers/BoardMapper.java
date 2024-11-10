@@ -17,6 +17,6 @@ public interface BoardMapper {
 	public ArrayList<Tb_Board> viewBoard(String userEmail);
 	List<Tb_Board> selectAllBoards();
 	
-	
+	public List<Tb_Board> searchBoard(String searchValue);
 
 }

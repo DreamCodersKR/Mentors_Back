@@ -70,5 +70,9 @@ public class BoardService {
 		}
 	}
 	
+	// 게시물 검색(조회)
+	public List<Tb_Board> getSearchBoardList(String searchValue) {
+		return boardMapper.searchBoard(searchValue);
+	}
 	
 }

@@ -15,6 +15,7 @@ import com.dream.entity.Tb_Board;
 import com.dream.entity.Tb_Comment;
 import com.dream.service.BoardService;
 
+
 import jakarta.servlet.http.HttpSession;
 
 @RestController
@@ -68,5 +69,17 @@ public class BoardController {
 		return delResult;
 	}
 	
+	// 게시물 조회
+	@GetMapping("/boardSearch/{search}")
+	public ResponseEntity<List<Tb_Board>> searchBoard(@PathVariable("search") String searchValue) {
+		searchValue = "%"+searchValue+"%";
+		List<Tb_Board> list = boardService.getSearchBoardList(searchValue);
+//		System.out.println(list);
+		List<Tb_Board> filteredBoardList = list.stream()
+			    .filter(board -> !"Y".equals(board.getBoardDelYn()))
+			    .collect(Collectors.toList());
+//		System.out.println(filteredBoardList);
+		return ResponseEntity.ok(filteredBoardList);	
+	}
 	
 }
