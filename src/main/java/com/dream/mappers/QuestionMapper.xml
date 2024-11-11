@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.mappers.QuestionMapper">
+    <select id="getQuestionsByCategory" parameterType="map" resultType="com.dream.entity.Tb_Question">
+        SELECT 
+            question_idx,
+            category_idx,
+            question_content,
+            placeholder,
+            mentor_yn
+        FROM 
+            tb_question
+        WHERE 
+            category_idx = #{categoryIdx} 
+            AND mentor_yn = #{mentorYn}
+    </select>
+</mapper>
