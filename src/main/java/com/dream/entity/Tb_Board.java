@@ -33,10 +33,10 @@ public class Tb_Board {
     private LocalDateTime boardWriteDt;
 
     @Column(name = "board_views", nullable = false)
-    private int boardViews = 0;
+    private int boardViews;
 
     @Column(name = "board_likes", nullable = false)
-    private int boardLikes = 0;
+    private int boardLikes;
     
     @Column(name = "board_del_yn", nullable = false)
     private String boardDelYn ="N";

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -17,6 +18,7 @@ import com.dream.repository.BoardRepository;
 import com.dream.repository.UserRepository;
 
 @Service
+@Transactional
 public class BoardService {
 
 	@Autowired
@@ -73,6 +75,12 @@ public class BoardService {
 	// 게시물 검색(조회)
 	public List<Tb_Board> getSearchBoardList(String searchValue) {
 		return boardMapper.searchBoard(searchValue);
+	}
+	
+	@Transactional
+	public boolean incrementLikes (Integer boardIdx) {
+		int updateRows = boardMapper.incrementLikes(boardIdx);
+	    return updateRows > 0;
 	}
 	
 }

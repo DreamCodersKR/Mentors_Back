@@ -77,7 +77,11 @@
 		b.board_write_dt DESC;
 	</select>
 
-
+	<update id="incrementLikes" parameterType="int">
+	    UPDATE tb_board
+	    SET board_likes = board_likes + 1
+	    WHERE board_idx = #{boardIdx}
+	</update>
 
 
 </mapper>

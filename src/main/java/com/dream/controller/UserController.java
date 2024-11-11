@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,13 +58,20 @@ public class UserController {
 //		System.out.println("Vue에서 받은 Post 데이터 : " + user);
 
 		Map<String, Object> result = new HashMap<>();
+		
+		// 이메일 중복 확인
+	    if (userService.isEmailExists(user.getEmail())) {
+	        result.put("status", "fail");
+	        result.put("message", "이미 가입된 이메일입니다.");
+	        return ResponseEntity.status(HttpStatus.CONFLICT).body(result);
+	    }
 
 		// 비밀번호 암호화 인코딩
 		String hashedUserPw = userService.encryptedPassword(user.getPassword());
 		user.setPassword(hashedUserPw);
 
 		// 회원가입
-		userService.UserJoin(user);
+		userService.userJoin(user);
 
 		// 회원정보 리턴
 		result.put("email", user.getEmail());
@@ -79,6 +87,7 @@ public class UserController {
 
 		String email = user.getEmail();
 		String password = user.getPassword();
+		System.out.println("컨트롤러에서 받은 비밀번호: " + user.getPassword());
 		
 //		비밀번호 일치여부 체크
 		boolean checkPassword = userService.checkPassword(email, password);

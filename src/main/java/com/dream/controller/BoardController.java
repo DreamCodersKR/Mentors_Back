@@ -1,9 +1,11 @@
 package com.dream.controller;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dream.entity.Tb_Board;
 import com.dream.entity.Tb_Comment;
+import com.dream.repository.BoardRepository;
 import com.dream.service.BoardService;
 
 
@@ -23,6 +26,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	BoardRepository boardRepo;
 	
 	@PostMapping("/writeBoard")
 	public ResponseEntity<Map<String, Object>> writeBoard(@RequestBody Tb_Board board,HttpSession session) {
@@ -80,6 +86,25 @@ public class BoardController {
 			    .collect(Collectors.toList());
 //		System.out.println(filteredBoardList);
 		return ResponseEntity.ok(filteredBoardList);	
+	}
+	
+	// 게시글 좋아요
+	@PostMapping("/board/like/{boardIdx}")
+	public ResponseEntity<Map<String, Object>> likeBoard(@PathVariable("boardIdx") Integer boardIdx) {
+		boolean success = boardService.incrementLikes(boardIdx);
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		if (success) {
+			int updatedLikes = boardRepo.findById(boardIdx).get().getBoardLikes(); 
+	        response.put("message", "좋아요가 반영되었습니다.");
+	        response.put("updatedLikes", updatedLikes); 
+	        return ResponseEntity.ok(response); 
+        } else {
+        	response.put("message", "게시글을 찾을 수 없습니다.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+		
 	}
 	
 }
