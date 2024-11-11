@@ -104,7 +104,18 @@ public class BoardController {
         	response.put("message", "게시글을 찾을 수 없습니다.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
-		
 	}
 	
+	@GetMapping("/board/increase/{id}")
+	public ResponseEntity<Tb_Board> increaseBoardViews(@PathVariable("id") Integer boardIdx) {
+	    boardService.incrementViews(boardIdx);
+
+	    // 게시글 정보 가져오기
+	    Tb_Board board = boardService.getBoardDetail(boardIdx);
+	    if (board != null) {
+	        return ResponseEntity.ok(board);
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
+	}
 }

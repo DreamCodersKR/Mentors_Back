@@ -82,6 +82,12 @@
 	    SET board_likes = board_likes + 1
 	    WHERE board_idx = #{boardIdx}
 	</update>
+	
+	<update id="incrementViews" parameterType="int">
+	    UPDATE tb_board
+	    SET board_views = board_views + 1
+	    WHERE board_idx = #{boardIdx}
+	</update>
 
 
 </mapper>

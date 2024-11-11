@@ -21,5 +21,7 @@ public interface BoardMapper {
 	public List<Tb_Board> searchBoard(String searchValue);
 	
 	int incrementLikes(@Param("boardIdx") Integer boardIdx);
+	
+	int incrementViews(@Param("boardIdx") Integer boardIdx);
 
 }

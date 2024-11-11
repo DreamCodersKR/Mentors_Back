@@ -83,4 +83,10 @@ public class BoardService {
 	    return updateRows > 0;
 	}
 	
+	@Transactional
+	public boolean incrementViews(Integer boardIdx) {
+	    int updatedRows = boardMapper.incrementViews(boardIdx);
+	    return updatedRows > 0; 
+	}
+	
 }
