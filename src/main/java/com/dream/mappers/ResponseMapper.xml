@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.mappers.ResponseMapper">
+
+    <!-- tb_bios 데이터 삽입 -->
+    <insert id="insertBios" useGeneratedKeys="true" keyProperty="biosIdx">
+        INSERT INTO tb_bios ( user_email, bios_date, status, response_type)
+        VALUES ( #{userEmail}, NOW(), 'pending', #{responseType})
+    </insert>
+
+    <!-- tb_bios_detail 데이터 삽입 -->
+    <insert id="insertBiosDetail">
+        INSERT INTO tb_bios_detail (bios_idx, question_idx, detail_content, detail_date, bios_title, parent_category_id, sub_category_name)
+        VALUES (#{biosIdx}, #{questionIdx}, #{detailContent}, NOW(), #{biosTitle}, #{parentCategoryId}, #{subCategoryName})
+    </insert>
+
+</mapper>

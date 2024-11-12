@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dream.mappers.CategoryMapper">
+    <!-- 카테고리와 하위 카테고리 조회 -->
+    <select id="getCategoryWithSubcategories" parameterType="int" resultMap="categoryResultMap">
+        SELECT 
+            c1.category_idx AS categoryIdx, 
+            c1.category_name AS categoryName,
+            c2.category_idx AS subCategoryIdx, 
+            c2.category_name AS subCategoryName
+        FROM 
+            tb_category c1
+        LEFT JOIN 
+            tb_category c2 
+        ON 
+            c1.category_idx = c2.super_category
+        WHERE 
+            c1.category_idx = #{categoryId}
+    </select>
+
+    <resultMap id="categoryResultMap" type="com.dream.dto.CategoryDto">
+        <id property="categoryIdx" column="categoryIdx"/>
+        <result property="categoryName" column="categoryName"/>
+        <collection property="subCategories" ofType="com.dream.dto.SubCategoryDto">
+            <result property="subCategoryIdx" column="subCategoryIdx"/>
+            <result property="subCategoryName" column="subCategoryName"/>
+        </collection>
+    </resultMap>
+</mapper>

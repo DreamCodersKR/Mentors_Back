@@ -1,7 +1,7 @@
 package com.dream.service;
 
 import com.dream.entity.Tb_Question;
-import com.dream.repository.QuestionRepository;
+import com.dream.mappers.QuestionMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,14 +9,16 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionMapper questionMapper;
 
-    public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public QuestionService(QuestionMapper questionMapper) {
+        this.questionMapper = questionMapper;
     }
 
-    public List<Tb_Question> getQuestionsByCategory(Integer categoryIdx) {
-    	System.out.println("값제데로 호출되고있나??" + questionRepository.findByCategory_CategoryIdx(categoryIdx));
-        return questionRepository.findByCategory_CategoryIdx(categoryIdx);
+    public List<Tb_Question> getQuestionsByCategory(Integer categoryIdx, char mentorYn) {
+        System.out.println("카테고리 ID: " + categoryIdx + ", 멘토 여부: " + mentorYn);
+        List<Tb_Question> results = questionMapper.getQuestionsByCategory(categoryIdx, mentorYn);
+        results.forEach(question -> System.out.println("질문 내용: " + question));
+        return results;
     }
 }

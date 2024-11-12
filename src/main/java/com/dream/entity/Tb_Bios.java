@@ -10,13 +10,13 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class Tb_Bios {
-	 @Id
+	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "bios_idx", nullable = false)
 	    private Integer biosIdx;
 
-	    @Column(name = "bios_title", length = 500, nullable = false)
-	    private String biosTitle;
+//	    @Column(name = "bios_title", length = 500, nullable = false)
+//	    private String biosTitle;
 
 	    @ManyToOne
 	    @JoinColumn(name = "user_email", nullable = false)
@@ -24,4 +24,10 @@ public class Tb_Bios {
 
 	    @Column(name = "bios_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	    private LocalDateTime biosDate;
+	    
+	    @Transient
+	    private String userEmail;
+	    
+	    @Transient
+	    private String responseType;
 }

@@ -25,7 +25,23 @@ public class Tb_Bios_Detail {
 
     @Column(name = "detail_content", nullable = false, columnDefinition = "TEXT")
     private String detailContent;
+    
+    @Column(name = "bios_title", length = 500, nullable = false)
+    private String biosTitle;
+    
+    @Column(name = "parent_category_id", nullable = false)
+    private Integer parentCategoryId;
+    
+    @Column(name = "sub_category_name", length = 100, nullable = false)
+    private String subCategoryName;
 
     @Column(name = "detail_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime detailDate;
+    
+    @Transient
+    private int biosIdx;
+    
+    @Transient
+    private int questionIdx;
+    
 }

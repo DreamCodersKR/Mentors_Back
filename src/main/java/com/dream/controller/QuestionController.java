@@ -12,12 +12,14 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
 
-	@Autowired
-	private QuestionService questionService;	
+    @Autowired
+    private QuestionService questionService;
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Tb_Question>> getQuestionsByCategory(@PathVariable("categoryId") Integer categoryId) {
-        List<Tb_Question> questions = questionService.getQuestionsByCategory(categoryId);
+    public ResponseEntity<List<Tb_Question>> getQuestionsByCategory(
+            @PathVariable("categoryId") Integer categoryId,
+            @RequestParam("mentorYn") char mentorYn) { 
+        List<Tb_Question> questions = questionService.getQuestionsByCategory(categoryId, mentorYn);
         if (questions != null && !questions.isEmpty()) {
             return ResponseEntity.ok(questions);
         } else {

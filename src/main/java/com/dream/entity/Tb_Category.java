@@ -24,5 +24,5 @@ public class Tb_Category {
     private Tb_Category superCategory;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tb_Question> questions; // 질문 리스트와의 연관
+    private List<Tb_Question> questions; 
 }
